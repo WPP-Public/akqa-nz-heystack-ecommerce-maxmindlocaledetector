@@ -1,0 +1,5 @@
+services:
+  maxmind_locale_detector:
+    class: Heystack\Maxmind\MaxMindLocaleDetector
+    tags:
+      - { name: autoinject }
