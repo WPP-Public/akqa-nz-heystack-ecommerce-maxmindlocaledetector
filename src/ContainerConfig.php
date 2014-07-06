@@ -7,7 +7,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * @author Cam Spiers <cameron@heyday.co.nz>
- * @package Heystack\Ecommerce\Config
+ * @package Heystack\Maxmind
  */
 class ContainerConfig implements ConfigurationInterface
 {
