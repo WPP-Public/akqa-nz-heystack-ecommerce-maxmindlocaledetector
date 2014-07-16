@@ -71,12 +71,19 @@ class MaxMindLocaleDetector implements LocaleDetectionInterface
         $location = false;
 
         if ($this->isAllowedUserAgent($request->getHeader('User-Agent'))) {
+            $ip = static::parseIP($request->getIP());
+
+            if (!$ip) {
+                return null;
+            }
+            
             $fp = fopen(
-                sprintf('http://geoip.maxmind.com/a?l=%s&i=%s', $this->key, $request->getIP()),
+                sprintf('http://geoip.maxmind.com/a?l=%s&i=%s', $this->key, $ip),
                 'r',
                 null,
                 stream_context_create(['http' => ['timeout' => $this->timeout]])
             );
+
             if (is_resource($fp)) {
                 $location = stream_get_contents($fp);
                 fclose($fp);
@@ -115,5 +122,16 @@ class MaxMindLocaleDetector implements LocaleDetectionInterface
         }
 
         return true;
+    }
+
+    /**
+     * @param string $ip
+     * @return string|bool
+     */
+    public static function parseIP($ip)
+    {   
+        preg_match('{\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b}', $ip, $matches);
+        
+        return isset($matches[0]) ? $matches[0] : false;
     }
 }
