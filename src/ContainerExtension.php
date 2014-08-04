@@ -23,8 +23,8 @@ class ContainerExtension extends Extension
      * @param ContainerBuilder $container A ContainerBuilder instance
      *
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
-     *
-     * @api
+     * 
+     * @return void
      */
     public function load(array $configs, ContainerBuilder $container)
     {
