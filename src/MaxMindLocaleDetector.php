@@ -78,10 +78,10 @@ class MaxMindLocaleDetector implements LocaleDetectionInterface
             }
             
             $fp = fopen(
-                sprintf('http://geoip.maxmind.com/a?l=%s&i=%s', $this->key, $ip),
+                sprintf('https://geoip.maxmind.com/a?l=%s&i=%s', $this->key, $ip),
                 'r',
                 null,
-                stream_context_create(['http' => ['timeout' => $this->timeout]])
+                stream_context_create(['https' => ['timeout' => $this->timeout]])
             );
 
             if (is_resource($fp)) {
